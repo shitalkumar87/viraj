@@ -1,0 +1,15 @@
+.main_head{
+    height:50px;
+    background-color: lightgreen;
+    padding: 10px 50px;
+}
+.login_box{
+    width: 25%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    /* border: 1px solid red; */
+    justify-content: space-between;
+    margin-left: 70%;
+    font-size: 20px;
+}
