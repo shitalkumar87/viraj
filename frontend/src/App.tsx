@@ -1,12 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { Box,Button } from '@chakra-ui/react'
+import "./App.css";
+import { Box } from "@chakra-ui/react";
+import Allroute from "./routes/Allroute";
 
 function App() {
   return (
     <div className="App">
-      <Box><Button>This is button</Button>THis is working</Box>
+      <Box>
+        <Allroute />
+      </Box>
     </div>
   );
 }
