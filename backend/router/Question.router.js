@@ -64,25 +64,24 @@ QuestionRouter.delete("/delete/:id",async(req,res)=>{
     }
 })
 
-QuestionRouter.patch("/ansdelete/:id",async(req,res)=>{
-    const Id=req.params.id;
-    const post=await PostModel.findById({"_id":Id})
+// QuestionRouter.patch("/ansdelete/:id",async(req,res)=>{
+//     const Id=req.params.id;
+//     const post=await PostModel.findById({"_id":Id})
      
-    let updateans=post.answer
-    updateans.slice(0,1)
+    
      
-    try{
+//     try{
        
-        await PostModel.findByIdAndUpdate({"_id":Id},updateans)
+//         await PostModel.findByIdAndUpdate({"_id":Id})
              
-            res.send("Data deleted Successfully")
+//             res.send("Data deleted Successfully")
         
          
         
-    }
-    catch(err){
-        res.send("Wrong Credentials")
-    }
-})
+//     }
+//     catch(err){
+//         res.send("Wrong Credentials")
+//     }
+// })
 
 module.exports={QuestionRouter}
