@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import "./Homepage.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Homepage = () => {
   const [value, setValue] = useState("");
@@ -64,6 +64,25 @@ const Homepage = () => {
       >
         Ask your question below to get an answer from our Teachers{" "}
       </Heading>
+      <Box w="80%" m="auto">
+        <Heading
+          size={{ base: "8px", md: "xs", lg: "sm", xl: "md" }}
+          color="rgb(0, 9, 114)"
+          mt="2%"
+        >
+          To Join the Community Chat
+        </Heading>
+        <Link to="/join">
+          <Button
+            mt="8px"
+            backgroundColor={"#444ec2"}
+            color="whiteAlpha.800"
+            _hover={{ bg: "#94e3b5" }}
+          >
+            Click Here
+          </Button>
+        </Link>
+      </Box>
       <Box
         display={"flex"}
         justifyContent={"center"}
