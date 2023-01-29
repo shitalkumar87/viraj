@@ -89,11 +89,32 @@ const Homepage = () => {
           Submit Question
         </Button>
       </Box>
-      <Box className="questions">
+      <Box className="questions" display={"flex"} flexDirection="column">
         {qArr.data?.map((el: any) => (
-          <Box key={el._id} display="flex" justifyContent={"space-between"}>
-            <Text>{el.question}</Text>
-            <Button onClick={() => toAnswer(el._id)}>Go to Answers</Button>
+          <Box
+            key={el._id}
+            display="flex"
+            justifyContent={"space-between"}
+            pl="5%"
+            pr="5%"
+            mt="5px"
+          >
+            <Text
+              color={"#444EC2"}
+              fontWeight="Bold"
+              fontSize={{ base: "xs", md: "sm", lg: "md", xl: "lg" }}
+              mr="2%"
+            >
+              {el.question}
+            </Text>
+            <Button
+              backgroundColor={"#44C278"}
+              color="whiteAlpha.800"
+              _hover={{ bg: "#94e3b5" }}
+              onClick={() => toAnswer(el._id)}
+            >
+              Go to Answers
+            </Button>
           </Box>
         ))}
       </Box>
