@@ -1,13 +1,14 @@
-import "./App.css";
-import { Box } from "@chakra-ui/react";
-import Allroute from "./routes/Allroute";
+import './App.css';
+import Allroute from './routes/Allroute';
+import Navbar from './components/Navbar';
+
 
 function App() {
   return (
     <div className="App">
-      <Box>
-        <Allroute />
-      </Box>
+      <Navbar/>
+      <Allroute/>
+
     </div>
   );
 }

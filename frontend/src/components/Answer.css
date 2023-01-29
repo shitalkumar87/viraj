@@ -1,0 +1,39 @@
+.results{
+    /* border: 1px solid red; */
+    width: 80%;
+    margin: auto;
+    text-align: start;
+    margin-top: 20px;
+}
+.results>.res_ans{
+    display: flex;
+    justify-content: space-between;
+}
+.results>.res_ans>p{
+    /* border: 1px solid red; */
+    font-size: 25px;
+    font-weight: bold;
+}
+.results>.res_ans>button{
+    border: 1px solid rgb(0, 0, 0);
+    font-size: 15px;
+    font-weight: bold;
+    background-color: red;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+}
+.each_ele{
+    /* border: 1px solid green; */
+    background-color: rgb(192, 189, 189);
+    height: auto;
+    margin-top: 20px;
+    padding:10px 20px;
+    border-radius: 10px;
+    /* overflow-y: scroll; */
+}
+.each_ele~button{
+    color: red;
+    font-weight:400;
+    margin-left: 20px;
+}
