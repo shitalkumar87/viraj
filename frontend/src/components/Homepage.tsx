@@ -10,7 +10,9 @@ const Homepage = () => {
   const toast = useToast();
 
   const getQ = () => {
-    axios.get("").then((res) => setqArr(res));
+    axios
+      .get("http://localhost:8080/question")
+      .then((res) => setqArr(res.data));
   };
 
   useEffect(() => {
@@ -23,9 +25,15 @@ const Homepage = () => {
   };
   const submitQ = () => {
     //Post Data
-    axios.post("", {
-      value,
-    });
+    fetch(`http://localhost:8080/question/create`, {
+      method: "POST",
+      body: JSON.stringify({ question: value }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+
     toast({
       title: "Question Submitted.",
       description: "Your question will be answered by a teacher within 24 Hrs.",
@@ -35,7 +43,7 @@ const Homepage = () => {
 
     console.log("Submitted");
   };
-  console.log(value);
+  console.log(qArr);
   return (
     <Box className="main">
       <Heading
@@ -76,9 +84,7 @@ const Homepage = () => {
           Submit Question
         </Button>
       </Box>
-      <Box className="questions">
-        
-      </Box>
+      <Box className="questions"></Box>
     </Box>
   );
 };
