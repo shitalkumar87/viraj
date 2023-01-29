@@ -18,7 +18,7 @@ const Chat = () => {
   const [message, setMessage] = useState<any>("");
   const [messages, setMessages] = useState<any>([]);
 
-  const ENDPOINT = "http://localhost:8080";
+  const ENDPOINT = "wss://mangrove-adventurous-rabbit.glitch.me";
 
   const location = useLocation();
   useEffect(() => {
