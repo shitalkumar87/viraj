@@ -6,7 +6,6 @@ const PORT = process.env.PORT;
 const cors = require("cors");
 app.use(cors());
 app.use(express.json());
- 
 
 app.listen(PORT, async () => {
   try {
