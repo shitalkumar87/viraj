@@ -18,3 +18,4 @@ app.listen(PORT, async () => {
   } catch (error) {
     console.log("connection failed");
   }
+})

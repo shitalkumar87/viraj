@@ -1,5 +1,5 @@
 const express=require("express")
- 
+ require("dotenv").config();
 const QuestionRouter=express.Router()
 const {PostModel}=require("../model/post.model")
 QuestionRouter.get("/",async(req,res)=>{
@@ -64,24 +64,20 @@ QuestionRouter.delete("/delete/:id",async(req,res)=>{
     }
 })
 
-// QuestionRouter.patch("/ansdelete/:id",async(req,res)=>{
-//     const Id=req.params.id;
-//     const post=await PostModel.findById({"_id":Id})
-     
-    
-     
-//     try{
+QuestionRouter.patch("/ansdelete/:id",async(req,res)=>{
+    const Id=req.params.id;
+    payload=req.body.answer
+    const post=await PostModel.findById({"_id":Id})
+      
+    try{
        
-//         await PostModel.findByIdAndUpdate({"_id":Id})
+        await PostModel.findByIdAndUpdate({"_id":Id})
              
-//             res.send("Data deleted Successfully")
-        
-         
-        
-//     }
-//     catch(err){
-//         res.send("Wrong Credentials")
-//     }
-// })
+            res.send("Data deleted Successfully") 
+    }
+    catch(err){
+        res.send("Wrong Credentials")
+    }
+})
 
 module.exports={QuestionRouter}

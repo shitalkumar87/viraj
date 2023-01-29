@@ -1,10 +1,12 @@
 import * as types from "./actiontypes"
 
+const token = localStorage.getItem("usertoken");
 const initialState = {
-    alldata: null,
-    massage: "",
+    isAuth: false,
+    token: "",
     isLoading: false,
-    isError: false
+    isError: false,
+    // user: JSON.parse(localStorage.getItem("user"))|| {}
 }
 
 export const reducer = (state = initialState, action) => {
@@ -16,23 +18,28 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: true,
-                isError: false
+                isError: false,
+                isAuth: false,
             }
 
         case types.LOGIN_SUCCESS:
+            localStorage.setItem('usertoken',payload.token)
+            console.log(payload)
             return {
                 ...state,
                 isLoading: false,
                 isError: false,
-                alldata: payload
+               token:payload.token,
+               isAuth: true
             }
 
         case types.LOGIN_FAILURE:
             return {
                 ...state,
+                isAuth: false,
                 isLoading: false,
                 isError: true,
-                alldata: null
+                
             }
 
 

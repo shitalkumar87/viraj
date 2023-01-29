@@ -1,70 +1,79 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import {
   Input,
   Box,
   Image,
   Flex,
-  Text
+  Text,
+  useToast
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom"
 import "./Login.css";
-import { getLogin } from "../redux/action";
+import { Userlogin } from "../redux/Authlogin/action";
 
 import { useState } from "react";
 import { Spinner } from '@chakra-ui/react'
 
 import {saveLocalData,getLocalData } from "../Utils/LocalStorage";
 
-const initialState = {
-  Email: "",
-  Pass: ""
-}
-
-const reducer = (state:any, action:any) => {
-  switch (action.type) {
-    
-    case "Email": return { ...state, Email: action.payload }
-
-    case "Pass": return { ...state, Pass: action.payload }
-
-    default: return state
-  }
-}
+ 
 
 
 
 
 const Login = () => {
-  const dispatchtwo = useDispatch()
+  const [login,SetLogin]=useState({})
+  const dispatch:any = useDispatch()
   const navigate = useNavigate()
-  const [dummy, setDummy] = useState(false);
-  const [dummy1, setDummy1] = useState(false);
+  const toast=useToast()
  
-  const { alldata, isLoading, isError } = useSelector((state:any) => {
-    return {
-      alldata: state.alldata,
-      isLoading: state.isLoading,
-      isError: state.isError
-    }
-  });
-  const [state, dispatch] = useReducer(reducer, initialState)
+   const {isAuth,isError,isLoading} =useSelector((store:any)=>store.loginAuth)
+   const  store=useSelector((store:any)=>store.loginAuth)
+    console.log(store)
+    
 
-  let {Email, Pass } = state;
-
-  const handleChange = (e:any) => {
-    let { name, value } = e.target;
-    dispatch({ type: name, payload: value })
-  }
+   
+    const handleChange=(e:any)=>{
+      const {name,value}=e.target
+      SetLogin({
+       ...login,
+       [name]:value
+      })
+   }
 
 
 
  const handleSubmit=(e:any)=>{
-
+  e.preventDefault()
+   dispatch(Userlogin(login))
  }
+ useEffect(()=>{
+  if(isAuth){
+    toast({
+      title: "Success",
+      description: "Welcome To The Answer Dashboard",
+      status: "success",
+      duration: 2000,
+      position: "top",
+      isClosable: true,
+    });
 
+    navigate("/")
+  }
+  if(isError){
+   toast({
+     title: "Something Went Wrong ",
+     description: "Enter correct Email and Password",
+     status: "error",
+     duration: 2000,
+     position: "top",
+     isClosable: true,
+   });
+  }
+},[isAuth,isError])
   
-  // console.log(isLoading)
+  
 
   const nameLocal = getLocalData("name") || ""
 
@@ -79,9 +88,9 @@ const Login = () => {
             }
             <Text className="textLogin">Login form</Text>
             <label> Email</label>
-            <Input type="email" name="Email" variant={"unstyled"} border={"0.5px solid #8d8d8d"} value={Email} onChange={handleChange} required />
+            <Input type="email" name="email" variant={"unstyled"} border={"0.5px solid #8d8d8d"}   onChange={handleChange} required />
             <label>Password</label>
-            <Input type="password" name="Pass" variant={"unstyled"} border={"0.5px solid #8d8d8d"} value={Pass} onChange={handleChange} required />
+            <Input type="password" name="password" variant={"unstyled"} border={"0.5px solid #8d8d8d"}   onChange={handleChange} required />
             {
               isLoading ? <Spinner
                 thickness='4px'
