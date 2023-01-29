@@ -30,7 +30,7 @@ const Homepage = () => {
     })
       .then((res) => res.json())
       // .then((res) => console.log(res))
-       .catch((err) => console.log(err));
+      .catch((err) => console.log(err));
 
     toast({
       title: "Question Submitted.",
@@ -40,7 +40,7 @@ const Homepage = () => {
     });
 
     // console.log("Submitted");
-    setValue("")
+    setValue("");
     getQ();
   };
   // console.log(qArr);
@@ -49,7 +49,7 @@ const Homepage = () => {
   };
   useEffect(() => {
     getQ();
-  }, []);
+  }, [qArr]);
   return (
     <Box className="main">
       <Heading
