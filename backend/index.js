@@ -11,9 +11,9 @@ app.use(express.json());
 app.listen(PORT, async () => {
   try {
     await connect;
-    console.log(`http://localhost:${PORT}`);
+    console.log(`http://localhost:8080`);
   } catch (error) {
     console.log("connection failed");
   }
-  console.log(`The Port is Running on ${PORT}`);
+  console.log(`The Port is Running on 8080`);
 });
