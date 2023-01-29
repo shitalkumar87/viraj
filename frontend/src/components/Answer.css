@@ -33,7 +33,8 @@
     /* overflow-y: scroll; */
 }
 .each_ele~button{
-    color: red;
+    
     font-weight:400;
     margin-left: 20px;
+    margin-top: 15px;
 }

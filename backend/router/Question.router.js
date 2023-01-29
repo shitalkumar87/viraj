@@ -1,10 +1,21 @@
 const express=require("express")
- require("dotenv").config();
+require("dotenv").config();
 const QuestionRouter=express.Router()
 const {PostModel}=require("../model/post.model")
 QuestionRouter.get("/",async(req,res)=>{
      
     const data= await PostModel.find()
+     try{
+         res.send({"data":data})
+     }
+     catch(err){
+        res.send("Eroor")
+     }
+})
+
+QuestionRouter.get("/:id",async(req,res)=>{
+    const Id=req.params.id;
+    const data= await PostModel.find({_id:Id})
      try{
          res.send({"data":data})
      }

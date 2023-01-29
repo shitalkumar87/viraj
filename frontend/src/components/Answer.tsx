@@ -1,3 +1,6 @@
+import {useEffect,useState} from "react";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 import "./Answer.css";
 import {
   Modal,
@@ -5,19 +8,52 @@ import {
   ModalContent,
   ModalHeader,
   ModalFooter,
-  ModalBody,
   ModalCloseButton,
   Button,
   useDisclosure,
   Textarea,
+  Toast,
+  useToast,
 } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 
 const Answer = () => {
-  const ans_arr = ["first", "Second", "Third"];
+  const [qArr, setqArr] = useState<any>("");
+  const {id}=useParams()
+  console.log(id)
+  const toast=useToast()
+  const navigate=useNavigate()
+  const token=localStorage.getItem("usertoken")
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const getQ = (id:any) => {
+    axios
+      .get(`http://localhost:8080/question/${id}`)
+      .then((res) => setqArr(res.data.data[0]));
+          
+  };
+   
+  console.log(qArr)
   const deleteQuestion=()=>{
-    console.log("delete this question")
+     fetch(`http://localhost:8080/question/delete/${id}`,{
+      method:"DELETE",
+       
+      headers: {
+        "Content-Type": "application/json",
+      }
+     } )
+
+     toast({
+      title: "Success",
+      description: "Question Deleted successfully",
+      status: "success",
+      duration: 2000,
+      position: "top",
+      isClosable: true,
+    });
+
+    navigate("/")
+
   }
 
   const deleteAnswer=()=>{
@@ -29,22 +65,27 @@ const Answer = () => {
     console.log("Added this Answer")
   }
 
+  useEffect(()=>{
+    getQ(id)
+  },[])
+
   return (
     <div className="results">
       <div className="res_ans">
         <p>All Results</p>
-        <button onClick={onOpen}>Add Answer</button>
+         {token&& <button onClick={onOpen}>Add Answer</button>}
       </div>
-      <div className="each_ele">Question:</div>
-      <button onClick={deleteQuestion}>Delete Question</button>
-      {ans_arr?.map((ele,ind) => {
+      <div className="each_ele">Question:{qArr.question}</div>
+       {token && <Button variant={"outline"} colorScheme="teal" onClick={deleteQuestion}>Delete Question</Button>}
+      {qArr.answer==undefined||0?<h1>Answer Not Available</h1>:qArr.answer?.map((ele:any,ind:any) => {
         return (
           <div>
-            <div className="each_ele">{`${ind+1}) ${ele}`}</div>
-            <button onClick={deleteAnswer}>Delete Answer</button>
+            <div className="each_ele" key="sk">{`${ind+1}) ${ele}`}</div>
+             {token &&<Button colorScheme="red" onClick={deleteAnswer}>Delete Answer</Button>}
           </div>
         );
       })}
+      
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

@@ -24,6 +24,7 @@ export const reducer = (state = initialState, action) => {
 
         case types.LOGIN_SUCCESS:
             localStorage.setItem('usertoken',payload.token)
+            
             console.log(payload)
             return {
                 ...state,
