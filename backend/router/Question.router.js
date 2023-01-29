@@ -41,13 +41,13 @@ QuestionRouter.post("/create",async(req,res)=>{
 QuestionRouter.patch("/edit/:id",async(req,res)=>{
     const Id=req.params.id;
     const payload=req.body;
-    // const note= await PostModel.findOne({_id:Id})
+     
     
     try{
          
             await PostModel.findByIdAndUpdate({_id:Id},payload)
             res.send("update the Answer Succesfully")
-         
+            
          
          
     }
@@ -77,12 +77,12 @@ QuestionRouter.delete("/delete/:id",async(req,res)=>{
 
 QuestionRouter.patch("/ansdelete/:id",async(req,res)=>{
     const Id=req.params.id;
-    payload=req.body.answer
-    const post=await PostModel.findById({"_id":Id})
+    payload=req.body
+    
       
     try{
        
-        await PostModel.findByIdAndUpdate({"_id":Id})
+        await PostModel.findByIdAndUpdate({"_id":Id},payload)
              
             res.send("Data deleted Successfully") 
     }

@@ -47,6 +47,7 @@ const Login = () => {
  const handleSubmit=(e:any)=>{
   e.preventDefault()
    dispatch(Userlogin(login))
+   navigate("/")
  }
  useEffect(()=>{
   if(isAuth){
@@ -59,7 +60,6 @@ const Login = () => {
       isClosable: true,
     });
 
-    navigate("/")
   }
   if(isError){
    toast({

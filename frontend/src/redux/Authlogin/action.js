@@ -24,7 +24,7 @@ import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from "./actiontypes";
 export const Userlogin = (creds) => async (dispatch) => {
   dispatch({ type: LOGIN_REQUEST });
   try {
-    let res = await axios.post(`http://localhost:8080/teacher/login`, creds);
+    let res = await axios.post(`https://lazy-tan-cygnet-gown.cyclic.app/teacher/login`, creds);
       console.log(res)
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
      

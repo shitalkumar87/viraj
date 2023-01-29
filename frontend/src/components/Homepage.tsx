@@ -13,7 +13,7 @@ const Homepage = () => {
 
   const getQ = () => {
     axios
-      .get("http://localhost:8080/question")
+      .get("https://lazy-tan-cygnet-gown.cyclic.app/question")
       .then((res) => setqArr(res.data));
   };
 
@@ -23,14 +23,14 @@ const Homepage = () => {
   };
   const submitQ = () => {
     //Post Data
-    fetch(`http://localhost:8080/question/create`, {
+    fetch(`https://lazy-tan-cygnet-gown.cyclic.app/question/create`, {
       method: "POST",
       body: JSON.stringify({ question: value }),
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      // .then((res) => console.log(res))
+       .catch((err) => console.log(err));
 
     toast({
       title: "Question Submitted.",
@@ -39,10 +39,11 @@ const Homepage = () => {
       isClosable: true,
     });
 
-    console.log("Submitted");
+    // console.log("Submitted");
+    setValue("")
     getQ();
   };
-  console.log(qArr);
+  // console.log(qArr);
   const toAnswer = (id: any) => {
     navigate(`/${id}`);
   };
