@@ -1,11 +1,21 @@
 import { Box, Button, Textarea, Heading } from "@chakra-ui/react";
-import React from "react";
+import { useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import "./Homepage.css";
+import axios from "axios";
 
 const Homepage = () => {
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = useState("");
+  const [qArr, setqArr] = useState<any>([]);
   const toast = useToast();
+
+  const getQ = () => {
+    axios.get("").then((res) => setqArr(res));
+  };
+
+  useEffect(() => {
+    getQ();
+  }, []);
 
   let handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     let inputValue = e.target.value;
@@ -13,9 +23,12 @@ const Homepage = () => {
   };
   const submitQ = () => {
     //Post Data
+    axios.post("", {
+      value,
+    });
     toast({
       title: "Question Submitted.",
-      description: "Your question wil be answered by a teacher within 24 Hrs.",
+      description: "Your question will be answered by a teacher within 24 Hrs.",
       duration: 5000,
       isClosable: true,
     });
@@ -62,6 +75,9 @@ const Homepage = () => {
         >
           Submit Question
         </Button>
+      </Box>
+      <Box className="questions">
+        
       </Box>
     </Box>
   );
