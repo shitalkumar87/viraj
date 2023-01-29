@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // querystring module
-// import querystring from "query-string";
-// import io from "socket.io-client";
+import querystring from "query-string";
+import io from "socket.io-client";
 import { useLocation, useParams } from "react-router-dom";
 import InfoBar from "./Infobar/Info";
 import "./Chat.css";
@@ -22,9 +22,9 @@ const Chat = () => {
 
   const location = useLocation();
   useEffect(() => {
-    // const { name, room } = querystring.parse(location.search); // location comes with react router and gives us a prop called location
+    const { name, room } = querystring.parse(location.search); // location comes with react router and gives us a prop called location
 
-    // socket = io(ENDPOINT);
+    socket = io(ENDPOINT);
 
     setName(name);
     setRoom(room);

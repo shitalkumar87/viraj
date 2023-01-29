@@ -3,7 +3,7 @@ const socketio = require("socket.io");
 const http = require("http");
 const PORT = process.env.port || 8080;
 const { router } = require("./router");
-const { addUser, removeUser, getUsersinRoom, getUser } = require("./users");
+const { addUser, removeUser, getUsersInRoom, getUser } = require("./users");
 const cors = require("cors");
 //Basic rundown to make server.io working
 const app = express();
@@ -21,12 +21,12 @@ io.on("connection", (socket) => {
     if (error) return callback(error);
 
     socket.emit("message", {
-      user: "admin",
+      user: "jarvis",
       text: `${user.name},Welcome to the room ${user.room}`,
     });
     socket.broadcast.to(user.room).emit("message", {
-      user: "admin",
-      text: `${user.name} has joined`,
+      user: "jarvis",
+      text: `${user.name} has joined the room`,
     });
     socket.join(user.room);
     callback();
@@ -44,12 +44,12 @@ io.on("connection", (socket) => {
 
     if (user) {
       io.to(user.room).emit("message", {
-        user: "Admin",
-        text: `${user.name} has left.`,
+        user: "jarvis",
+        text: `${user.name} has left the room.`,
       });
       io.to(user.room).emit("roomData", {
         room: user.room,
-        users: getUsersinRoom(user.room),
+        users: getUsersInRoom(user.room),
       });
     }
   });

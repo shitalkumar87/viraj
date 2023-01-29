@@ -1,3 +1,4 @@
+import { Text } from "@chakra-ui/react";
 import React from "react";
 
 import "./Message.css";
@@ -12,18 +13,34 @@ const Message = ({ message: { text, user }, name }: any) => {
   }
 
   return isSentByCurrentUser ? (
-    <div style={{ backgroundColor: "gray", color: "black",marginTop:"5px" }}>
-      <p>{trimmedName}</p>
+    <div
+      style={{
+        backgroundColor: "rgb(68, 194, 120)",
+        color: "white",
+        margin: "left",
+        marginTop: "5px",
+        width: "50%",
+        borderRadius: "10px",
+      }}
+    >
+      <Text fontWeight={"bold"} >{trimmedName}</Text>
       <div>
-        <p>{text}</p>
+        <Text>{text}</Text>
       </div>
     </div>
   ) : (
-    <div>
+    <div style={{
+        backgroundColor: "#444EC2",
+        color: "white",
+        marginLeft: "50%",
+        marginTop: "10px",
+        width: "50%",
+        borderRadius: "10px",
+      }}>
       <div>
-        <p>{text}</p>
+        <Text fontWeight={"bold"}>{user}</Text>
       </div>
-      <p>{user}</p>
+      <Text>{text}</Text>
     </div>
   );
 };
