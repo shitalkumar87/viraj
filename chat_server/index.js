@@ -1,7 +1,7 @@
 const express = require("express");
 const socketio = require("socket.io");
 const http = require("http");
-const PORT = process.env.port || 8080;
+const PORT = process.env.port || 5000;
 const { router } = require("./router");
 const { addUser, removeUser, getUsersInRoom, getUser } = require("./users");
 const cors = require("cors");
