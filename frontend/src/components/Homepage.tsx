@@ -1,23 +1,21 @@
-import { Box, Button, Textarea, Heading } from "@chakra-ui/react";
+import { Box, Button, Textarea, Heading, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import "./Homepage.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
   const [value, setValue] = useState("");
   const [qArr, setqArr] = useState<any>([]);
   const toast = useToast();
+  const navigate = useNavigate();
 
   const getQ = () => {
     axios
       .get("http://localhost:8080/question")
       .then((res) => setqArr(res.data));
   };
-
-  useEffect(() => {
-    getQ();
-  }, []);
 
   let handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     let inputValue = e.target.value;
@@ -42,8 +40,15 @@ const Homepage = () => {
     });
 
     console.log("Submitted");
+    getQ();
   };
   console.log(qArr);
+  const toAnswer = (id: any) => {
+    navigate(`/${id}`);
+  };
+  useEffect(() => {
+    getQ();
+  }, []);
   return (
     <Box className="main">
       <Heading
@@ -84,7 +89,14 @@ const Homepage = () => {
           Submit Question
         </Button>
       </Box>
-      <Box className="questions"></Box>
+      <Box className="questions">
+        {qArr.data?.map((el: any) => (
+          <Box key={el._id} display="flex" justifyContent={"space-between"}>
+            <Text>{el.question}</Text>
+            <Button onClick={() => toAnswer(el._id)}>Go to Answers</Button>
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 };
